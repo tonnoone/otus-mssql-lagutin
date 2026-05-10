@@ -33,14 +33,13 @@ USE WideWorldImporters
 SELECT 
 	YEAR(I.InvoiceDate) as InvoiceYear, 
 	MONTH(I.InvoiceDate) as InvoiceMonth, 
-	I.InvoiceID, 
 	avg(L.UnitPrice), 
 	sum(L.UnitPrice)
 FROM Sales.Invoices I
 Left Join Sales.InvoiceLines L
 	On I.InvoiceID = L.InvoiceID
-group by YEAR(I.InvoiceDate), MONTH(I.InvoiceDate), I.InvoiceID
-Order by InvoiceYear, InvoiceMonth, I.InvoiceID
+group by YEAR(I.InvoiceDate), MONTH(I.InvoiceDate)
+Order by InvoiceYear, InvoiceMonth
 
 
 
