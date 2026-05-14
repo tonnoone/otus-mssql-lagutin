@@ -80,7 +80,9 @@ Left Join Sales.Customers as C
 Left Join Sales.OrderLines as L
 	ON O.OrderID = L.OrderID
 	AND L.PickingCompletedWhen Is Not Null
-Where L.UnitPrice > 100 OR L.Quantity > 20;
+Where L.UnitPrice > 100 OR L.Quantity > 20
+Order by OrderQuarter, Third, ODate Offset 1000 Rows
+Fetch Next 100 Rows Only;
 
 /*
 4. Заказы поставщикам (Purchasing.Suppliers),
