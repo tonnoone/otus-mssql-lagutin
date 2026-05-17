@@ -95,11 +95,20 @@ Order by W.StockItemID;
 Представьте несколько способов (в том числе с CTE). 
 */
 
-Select Top(5) S.CustomerID,
+-- неверный вариант
+/*Select Top(5) S.CustomerID,
 	Max(S.TransactionAmount)
 From Sales.CustomerTransactions As S
 Group by S.CustomerID
 Order by Max(S.TransactionAmount) Desc;
+*/
+
+Select Top(5) S.TransactionAmount, S.CustomerID,
+	(Select C.CustomerName
+		From Sales.Customers As C
+		Where C.CustomerID = S.CustomerID) As Customer
+From Sales.CustomerTransactions As S
+Order by S.TransactionAmount Desc
 
 --другой вариант
 ;With Trans As (
